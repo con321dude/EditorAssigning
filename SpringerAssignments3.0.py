@@ -1198,8 +1198,11 @@ if option == 1:
             c = input("Input any key to continue: ")  # Temporary manual breakpoint"""
 
             for check in checkboxes[1:]:
-                check.click()
-                i += 1
+                try:
+                    check.click()
+                    i += 1
+                except:
+                    i += 1
                 # print("Check number: ", i)
 
             # Submit
@@ -1564,12 +1567,26 @@ elif option == 2:  # 0 reviews completed
                 else:
 
                     # print("Clicking invite reviewers button for: ", str(button.get_attribute('id')))
-                    check = True
+
 
                     # c = input("Breakpoint")
                     inviteVal = driver.find_element_by_id('fg-al-'+'{x}'.format(x=skips))
 
-                    inviteVal.find_element_by_link_text("Invite Reviewers").click()
+                    print('fg-al-'+'{x}'.format(x=skips))
+                    print("text = ", inviteVal.text)
+                    # c = input("break")
+
+                    #//*[@id="fg-al-17"]/div[1]/a[6]
+                    #/html/body/form/div[4]/div[3]/div/div[3]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr[19]/td/div/div[1]/a[6]
+
+                    try:
+                        inviteVal.find_element_by_link_text("Invite Reviewers").click()
+                    except:
+                        c = input("Invite Reviewers button not found, please click the invite reviewers button, then send any key here to continue when done: ")
+                    skips = 0
+                    check = True
+
+
 
             # check if agree/invited exists (ignore if exists)
 
@@ -1603,8 +1620,11 @@ elif option == 2:  # 0 reviews completed
         # c = input("Input any key to continue: ")  # Temporary manual breakpoint
 
         for check in checkboxes[1:]:
-            check.click()
-            i += 1
+            try:
+                check.click()
+                i += 1
+            except:
+                i += 1
             # print("Check number: ", i)
 
         # Submit
