@@ -882,15 +882,18 @@ def pick22NonBoardMembers():
                 x += 1
                 criteria = False
                 break
-
-            # if this person has already been used for this article: (must be last because if it doesn't exist then it wont find the checkbox and output an error)
-            if (driver.find_element_by_id(
-                    'ReviewersGrid_ReviewersGridRepeater_InvitedBox_'+'{x}'.format(x=x)).is_selected()):
-                # print("This reviewer has already been checked!")
-                x += 1
+            try:
+                # if this person has already been used for this article: (must be last because if it doesn't exist then it wont find the checkbox and output an error)
+                if (driver.find_element_by_id(
+                        'ReviewersGrid_ReviewersGridRepeater_InvitedBox_'+'{x}'.format(x=x)).is_selected()):
+                    # print("This reviewer has already been checked!")
+                    x += 1
+                    criteria = False
+                    break
+            except:
+                x+=1
                 criteria = False
                 break
-
             # check other stuff:
 
             # Reached end of criteria check: assign this reviewer
@@ -977,14 +980,15 @@ window_before = driver.window_handles[0]
 
 
 delay = 0.1
-
-frame = WebDriverWait(driver, delay).until(
-    EC.presence_of_element_located((By.XPATH, '//frame[@name="content"]')))
+#
+# frame = WebDriverWait(driver, delay).until(
+#     EC.presence_of_element_located((By.XPATH, '//frame[@name="content"]')))
 
 # Access the frame which has the login box
 
-# frame = driver.find_element_by_xpath('//frame[@name="content"]')
-time.sleep(1)
+# frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+time.sleep(2)
+frame = driver.find_element_by_xpath('//iframe[@name="content"]')
 driver.switch_to.frame(frame)
 iframe = driver.find_element_by_xpath('//iframe[@name="login"]')
 driver.switch_to.frame(iframe)
@@ -1022,7 +1026,7 @@ time.sleep(6)
 
 window = driver.window_handles[0]
 driver.switch_to.window(window)
-frame = driver.find_element_by_xpath('//frame[@name="content"]')
+frame = driver.find_element_by_xpath('//iframe[@name="content"]')
 driver.switch_to.frame(frame)
 
 # c = input("Input any key to continue: ")  # Temporary manual breakpoint
@@ -1042,7 +1046,7 @@ if option == 1:
 
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
     # Click double arrow to go to last page
@@ -1067,7 +1071,7 @@ if option == 1:
     # pause:
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
     decision = driver.find_element_by_id("n"+'{x}'.format(x=articleNum))
@@ -1088,7 +1092,7 @@ if option == 1:
             time.sleep(6)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             # c = input("Input any key to continue: ")  # Temporary manual breakpoint
@@ -1129,7 +1133,7 @@ if option == 1:
                         time.sleep(6)
                         window = driver.window_handles[0]
                         driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                        frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                         driver.switch_to.frame(frame)
                     skips += 1
 
@@ -1146,7 +1150,7 @@ if option == 1:
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             # c = input("Input any key to continue: ")  # Temporary manual breakpoint
@@ -1162,7 +1166,7 @@ if option == 1:
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             # Check all classification matches
@@ -1217,7 +1221,7 @@ if option == 1:
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             # Select random page that is not last Page
@@ -1286,7 +1290,7 @@ if option == 1:
                 time.sleep(3)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
             # check two board members from first page
@@ -1305,7 +1309,7 @@ if option == 1:
                 time.sleep(4)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
                 # wait for confirmation/continue
@@ -1320,7 +1324,7 @@ if option == 1:
                     time.sleep(4)
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                     try:
@@ -1339,7 +1343,7 @@ if option == 1:
 
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                     driver.find_element_by_id("linkReturn").click()
@@ -1360,7 +1364,7 @@ if option == 1:
                 time.sleep(5)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
                 # click back to new assignments Button
@@ -1376,7 +1380,7 @@ if option == 1:
                     time.sleep(7)
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                 # c = input("break")
@@ -1392,413 +1396,368 @@ if option == 1:
                 # click next page
         print("Finished! Either max iterations have been reached, or user exited...\n Final iterations = ", iterations)
 
-elif option == 2:  # 0 reviews completed
+if option == 2:
     iterations = 0
+    total = int(input("How many iterations?  \n"))
+    # Click New Assignments button
+    # print("Selecting 'New Assignments' ...")
 
-    total = int(input("How many iterations would you like to do?   "))
+    driver.find_element_by_xpath(
+        '/html/body/form/div[3]/div[3]/div/div/div[3]/fieldset/div/div[3]/a[1]').click()
 
-    print("Iterations = ", iterations)
-    skips = 0
-    # waiting = input("Get to the 'invite reviewers' page of one you want then send a key here: ")
+    # Refresh Window and Frame
+    time.sleep(3)
 
-    # print("Clicking 0 review articles now...")
-    driver.find_element_by_id(
-        'ctl00_Folders_SubmissionsRequiringMoreReviewers_FolderLink').click()
-
-    # Refresh Window and frame
-    time.sleep(5)
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
-    # c = input("Input any key to continue: ")  # Temporary manual breakpoint
+    # Click double arrow to go to last page
+    button = driver.find_element_by_xpath(
+        "//table[@id='datatable']//tr[last()-"+'{x}'.format(x=skips)+"]")
+    # ActionChains(driver).move_to_element(button).click(button).perform()
+    articleNum = str(button.get_attribute('id'))
+    decision = driver.find_element_by_id("n"+'{x}'.format(x=articleNum))
+    # sort by Editor Decision to avoid Major/Minor Revisions
 
-    # click the organize by editor decision Button (left up arrow)
-    # alt = "Sort Up"
-    # button = driver.find_element_by_id(
-    #     "//table[@id='datatable']//tr[last()-"+'{x}'.format(x=skips)+"]")
-    # # ActionChains(driver).move_to_element(button).click(button).perform()
-    # //*[@id="nfr0"]
-    # articleNum = str(button.get_attribute('id'))
-    decision = driver.find_element_by_id("nfr0")
-
-    # print("Clicking sort by editor decision button.")
-    if ("Major Revision" in decision.text):
+    if("Major Revision" in decision.text):
         driver.find_element_by_xpath(
-            '//*[@id="FGSubmissions"]/div[3]/div[1]/div[2]/div[2]/div[1]/table/thead/tr/th[10]/div/div/div[1]/div[1]/a').click()
+            '//*[@id="FGSubmissions"]/div[3]/div[1]/div[2]/div[2]/div[1]/table/thead/tr/th[9]/div/div/div[1]/div[1]/a').click()
         time.sleep(6)
-    elif ("Minor Revision" in decision.text):
+    elif("Minor Revision" in decision.text):
         driver.find_element_by_xpath(
-            '//*[@id="FGSubmissions"]/div[3]/div[1]/div[2]/div[2]/div[1]/table/thead/tr/th[10]/div/div/div[1]/div[1]/a').click()
+            '//*[@id="FGSubmissions"]/div[3]/div[1]/div[2]/div[2]/div[1]/table/thead/tr/th[9]/div/div/div[1]/div[1]/a').click()
         time.sleep(6)
     else:
         pass
 
-    #
-
-    # wait the time
-
-    time.sleep(5)
+    # pause:
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
-    # pick the next article to do:
+    decision = driver.find_element_by_id("n"+'{x}'.format(x=articleNum))
 
-    while (total != 0):
-        # print("Skips = ", skips)
-        # print("Iterations completed = ", iterations)
-        # print("Total remaining = ", total)
+    # c = input("Input any key to continue: ")  # Temporary manual breakpoint
 
-        check = False
-        while (check == False):  # loop from first page to last element
-            # c = input("Manual breakpoint. Input any key to continue: ")
+    """driver.find_element_by_class_name('fg-page-last').click()"""
 
-            # print("Checking next article.", )
+    # c = input("Input any key to continue: ")  # Temporary manual breakpoint
 
-            button = driver.find_element_by_id("nfr"+'{x}'.format(x=skips))
+    # skips = int(input("How many skips? ")) #no longer needed!!
+    skips = 0
 
-            articleNum = str(button.get_attribute('id'))
+    # start of loop:
+    while total != 0:
+        if skips <= 100:
+            # Refresh Window and Frame
+            time.sleep(6)
+            window = driver.window_handles[0]
+            driver.switch_to.window(window)
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+            driver.switch_to.frame(frame)
 
-            # print(button.text)
-            # c = input("waiting")
+            # c = input("Input any key to continue: ")  # Temporary manual breakpoint
+            check = False
+            while(check == False):
+                # Select LAST Invite Reviewers button on the executable_path
+                # print("Selecting last 'Invite Reviewers option' ...")
+                button = driver.find_element_by_id(
+                    "fr"+'{x}'.format(x=skips))  # last()- //*[@id="fr0"]
+                ActionChains(driver).move_to_element(button).click(button).perform()
 
-            # check major/minor Revision (ignore if either exist)
+                # print(button.get_attribute('id'))
 
-            if("Major Revision" in button.text):
-                print("Editor Decision contains a 'Revision'. You must have completed all possible non-revisions. The total amount you completed is: ", iterations)
-                c = input(
-                    "This is a final exit breakpoint, exit the code here after writing down 'iterations'!")
-            if("Minor Revision" in button.text):
-                print("Editor Decision contains a 'Revision'. You must have completed all possible non-revisions. The total amount you completed is: ", iterations)
-                c = input(
-                    "This is a final exit breakpoint, exit the code here after writing down 'iterations'!")
+                articleNum = str(button.get_attribute('id'))
+                decision = driver.find_element_by_id("n"+'{x}'.format(x=articleNum))
 
-            elif ("Accept as is" in button.text):
-                # print("Editor Decision contains a 'Accept as is'. Increasing skips...")
-                if(articleNum == "row100"):
-                    # print("All articles on this page are skips, going forwards a page...")
-                    # go up a page...
-                    driver.find_element_by_xpath(
-                        '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
-                    time.sleep(7)
-                    window = driver.window_handles[0]
-                    driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
-                    driver.switch_to.frame(frame)
-                    skips = 0
-                skips += 1
+                # print(decision.text)
+                #c = input("break")
 
-            elif ("Declined" not in button.text):  # make sure declined exists (continue only if exists)
-                # print("None declined. Increasing skips...")
-                if(articleNum == "row100"):
-                    # print("All articles on this page are skips, going forwards a page...")
-                    # go up a page...
-                    driver.find_element_by_xpath(
-                        '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
-                    time.sleep(7)
-                    window = driver.window_handles[0]
-                    driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
-                    driver.switch_to.frame(frame)
-                    skips = 0
-                skips += 1
-            else:
-                if ("Invited" in button.text):
-                    # print("Someone is still invited. Increasing skips...")
-                    if(articleNum == "row100"):
-                        # print("All articles on this page are skips, going forwards a page...")
-                        # go up a page...
+                # since we sort by revisions, if we reach a major/minor revision, we can assume the rest will all be the same so we exit.
+                if("Major Revision" in decision.text):
+                    print("Editor Decision contains a 'Revision'. You must have completed all possible non-revisions. The total amount you completed is: ", iterations)
+                    c = input(
+                        "This is a final exit breakpoint, exit the code here after writing down 'iterations'!")
+                elif("Minor Revision" in decision.text):
+                    print("Editor Decision contains a 'Revision'. You must have completed all possible non-revisions. The total amount you completed is: ", iterations)
+                    c = input(
+                        "This is a final exit breakpoint, exit the code here after writing down 'iterations'!")
+
+                elif ("Accept as is" in decision.text):
+                    # print("Editor Decision contains a 'Accept as is'. Increasing skips...")
+                    if(articleNum == "fr100"):
+                        # print("All articles on this page are skips, going forward a page... and keeping the skips")
+
                         driver.find_element_by_xpath(
-                            '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
+                            '//*[@id="FGSubmissions"]/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/div/div[2]/table/tbody/tr/td[4]/a').click()
+                        # /html/body/form/div[4]/div[3]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/div/div[2]/table/tbody/tr/td[4]/a
                         time.sleep(6)
                         window = driver.window_handles[0]
                         driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                        frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                         driver.switch_to.frame(frame)
-                        skips = 0
-                    skips += 1
-
-                elif("Agreed" in button.text):
-                    # print("Someone has Agreed to this article. Increasing skips...")
-                    if(articleNum == "row100"):
-                        # print("All articles on this page are skips, going forwards a page...")
-                        # go up a page...
-                        driver.find_element_by_xpath(
-                            '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
-                        time.sleep(6)
-                        window = driver.window_handles[0]
-                        driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
-                        driver.switch_to.frame(frame)
-                        skips = 0
-                    skips += 1
-                elif("Partial Review Saved" in button.text):
-                    # print("Partial Review Saved. Increasing skips...")
-                    if(articleNum == "row100"):
-                        # print("All articles on this page are skips, going forwards a page...")
-                        # go up a page...
-                        driver.find_element_by_xpath(
-                            '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
-                        time.sleep(6)
-                        window = driver.window_handles[0]
-                        driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
-                        driver.switch_to.frame(frame)
-                        skips = 0
-                    skips += 1
-                elif("Late" in button.text):
-                    # print("There has been a late review. Increasing skips...")
-                    if(articleNum == "row100"):
-                        # print("All articles on this page are skips, going forwards a page...")
-                        # go up a page...
-                        driver.find_element_by_xpath(
-                            '//*[@id="tableContainer"]/form/div/div[1]/table/tbody/tr/td[2]/a[6]').click()
-                        time.sleep(6)
-                        window = driver.window_handles[0]
-                        driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
-                        driver.switch_to.frame(frame)
-                        skips = 0
                     skips += 1
 
                 else:
+                    # print("This article works, choosing this one: ", articleNum)
+                    if(articleNum == "fr100"):
+                        lastArticle = True
 
-                    # print("Clicking invite reviewers button for: ", str(button.get_attribute('id')))
-
-
-                    # c = input("Breakpoint")
-                    inviteVal = driver.find_element_by_id('fg-al-'+'{x}'.format(x=skips))
-
-                    print('fg-al-'+'{x}'.format(x=skips))
-                    print("text = ", inviteVal.text)
-                    # c = input("break")
-
-                    #//*[@id="fg-al-17"]/div[1]/a[6]
-                    #/html/body/form/div[4]/div[3]/div/div[3]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr[19]/td/div/div[1]/a[6]
-
-                    try:
-                        inviteVal.find_element_by_link_text("Invite Reviewers").click()
-                    except:
-                        c = input("Invite Reviewers button not found, please click the invite reviewers button, then send any key here to continue when done: ")
-                    skips = 0
                     check = True
 
-
-
-            # check if agree/invited exists (ignore if exists)
-
-            # assuming all criteria are passed:
-
-        # Temporary manual breakpoint
-        # c = input("Decreasing 'total'. Input any key to continue: ")
-        # total -= 1
-
-        # print("Searching by Classification Matches...")
-        driver.find_element_by_xpath(
-            "//select[@name='ReviewerSearchOptions$HomeJournalSearchModeDropDown']/option[text()='Search by Classification Matches']").click()
-
-        driver.find_element_by_xpath(
-            '/html/body/div[1]/form/div[4]/div[3]/fieldset/table/tbody/tr/td[5]/input').click()
-
-        # Refresh Window and frame
-        time.sleep(3)
-        window = driver.window_handles[0]
-        driver.switch_to.window(window)
-        frame = driver.find_element_by_xpath('//frame[@name="content"]')
-        driver.switch_to.frame(frame)
-
-        # Check all classification matches
-        checkboxes = []
-        i = 0
-        checkboxes = driver.find_elements_by_xpath("//input[@type='checkbox']")
-
-        # print("There are ", len(checkboxes), " total classification matches, selecting all.")
-
-        # c = input("Input any key to continue: ")  # Temporary manual breakpoint
-
-        for check in checkboxes[1:]:
-            try:
-                check.click()
-                i += 1
-            except:
-                i += 1
-            # print("Check number: ", i)
-
-        # Submit
-        # print("Submitting...")
-
-        # c = input("Input any key to continue: ")  # Temporary manual breakpoint
-
-        driver.find_element_by_id(
-            "ClassificationsSearchGrid_SubmitByClassificationsButton").click()  # //*[@id="ClassificationsSearchGrid_SubmitByClassificationsButton"]
-
-        # Refresh Window and frame
-        time.sleep(3)
-        window = driver.window_handles[0]
-        driver.switch_to.window(window)
-        frame = driver.find_element_by_xpath('//frame[@name="content"]')
-        driver.switch_to.frame(frame)
-
-        # Select random page that is not last Page
-        # print("Selecting Random Page (Not last page)...")
-
-        # c = input("Input any key to continue: ")  # Temporary manual breakpoint
-
-        pages = []
-        # pages = driver.find_elements_by_xpath(
-        #     "/html/body/form/div[5]/div[1]/div[3]/div[2]/div[1]/table/tbody/tr/td[2]/*")
-        # # pages = driver.find_element_by_id("ReviewersGrid_TopPaginator_paginatorPanel")
-        pages = driver.find_elements_by_class_name("paginationLink")
-        #/html/body/form/div[5]/div[1]/div[3]/div[2]/div[1]/table/tbody/tr/td[2]/span[2]
-
-            #//*[@id="ReviewersGrid_TopPaginator_paginatorPanel"]/table/tbody/tr/td[2]/span[2]
-  # //*[@id="ReviewersGrid_TopPaginator_paginatorPanel"]/table/tbody/tr/td[2]/span[2]
-        reviewersAssigned = []
-        count = 0
-        length = len(pages)/2
-        print("length = ", length)
-        # print(pages)
-        # c = input("break")
-        if length < 3:  # only one or two pages: dont click any page value
-            print("length of pages = ", length)
-            print("There are less than 3 pages, staying with first page.")
-            # c = input("small page count")
-
-            # print("Checking two board members, then 28 non board members...")
-            x = 0
-            pickTwoBoardMembers()
-            # c = input("Temporary break: ")
-            pick22NonBoardMembers()
-
-        else:
-            print("length of pages = ", length)
-            rand = random.randrange(0, length)  # select any except for last
-            print("rand = ", rand)
-
-            """
-            try:  # in case there arent any page numbers for some reason
-                length = len(pages)  # -2 to account for the two arrows
-            except:
-                length = 1
-
-            # print("There are ", length, " pages on this selection.")
-            if length > 10:
-                # print("There are more than 10 pages, setting max to 10...")
-                length = 10
-
-            if length < 3:
-                rand = 1
-            else:
-                rand = random.randrange(0, length)  # select any except for last
-                print("rand = ", rand)"""
-            # print("Random page choice: ", rand + 1)
-
-            # if page == 1... continue like normal
-
-            # if page !=1... click two from first page, then continue with count +=2
-
-            if rand > 1:  # if page choice is not the first page, pick two then continue
-                # print("Checking two board members from first page, then 28 from the other page...")
-
-                x = 0
-                pickTwoBoardMembers()
-                # c = input("Temporary break: ")
-                print("selecting random page: ", rand)
-                # c = input("break")
-                try:
-                    pages[rand].click()
-                except:
-                    print("Unable to click random page")
-                # c = input("Temporary break: ")
-                pick22NonBoardMembers()
-            else:
-                # print("Checking two board members, then 28 non board members...")
-                x = 0
-                pickTwoBoardMembers()
-                # c = input("Temporary break: ")
-                pick22NonBoardMembers()
+            button.find_element_by_link_text("Invite Reviewers").click()
 
             # Refresh Window and frame
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
-        # check two board members from first page
+            # c = input("Input any key to continue: ")  # Temporary manual breakpoint
 
-        # check 30 eligibile reviewers
+            # print("Searching by Classification Matches...")
+            driver.find_element_by_xpath(
+                "//select[@name='ReviewerSearchOptions$HomeJournalSearchModeDropDown']/option[text()='Search by Classification Matches']").click()
 
-        x = 0
+            driver.find_element_by_xpath(
+                '/html/body/div[1]/form/div[4]/div[3]/fieldset/table/tbody/tr/td[5]/input').click()
 
-        # c = input("Input any key to continue: ")  # Temporary manual breakpoint
-        try:
-            # click Proceed
-            driver.find_element_by_name('ProceedButton').click()
-
+            # Refresh Window and frame
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
-            # wait for confirmation/continue
-            # print("Make sure that all the selected reviewers are good. If any are bad, check the 'do not assign' checkbox for them.")
-            cont = 'y'  # temporary to remove user input
-            # cont = input("Would you like to continue and repeat? (y/n): ")
-            if(cont == 'y'):
-                # click confirm and send
+            # Check all classification matches
+            checkboxes = []
+            i = 0
+            checkboxes = driver.find_elements_by_xpath("//input[@type='checkbox']")
 
-                # print("You sent a y, clicking confirm and continuing now...")
+            '''Check how many classification matches exist, if <50, skip, else check all and continue'''
+
+            # //*[@id="datatable2"]/tbody
+            # /html/body/form/div[5]/div/div[2]/div/div[2]/div[1]/table/tbody
+
+            # //*[@id="ClassificationsSearchGrid_ItemsGrid_ctl01_lblNumberOfReviewers"]
+            # //*[@id="ClassificationsSearchGrid_ItemsGrid_ctl02_lblNumberOfReviewers"]
+            # ...
+            """
+            allClassifications = driver.find_element_by_id("datatable2")
+            reviewerCounter = 0
+            for x in checkboxes-1:
+
+                reviewerCounter += int(b)
+                if x < 10:
+                    b = string(driver.find_element_by_id(
+                        "ClassificationsSearchGrid_ItemsGrid_ctl0" + x + "_lblNumberOfReviewers"))  # fix for string concatination
+                    print(reviewerCounter)
+                elif x >= 10:
+                    b = string(driver.find_element_by_id(
+                        "ClassificationsSearchGrid_ItemsGrid_ctl" + x + "_lblNumberOfReviewers"))  # fix for string concatination
+                    print(reviewerCounter)
+
+            # print("There are ", len(checkboxes), " total classification matches, selecting all.")
+
+            c = input("Input any key to continue: ")  # Temporary manual breakpoint"""
+
+            for check in checkboxes[1:]:
+                try:
+                    check.click()
+                    i += 1
+                except:
+                    i += 1
+                # print("Check number: ", i)
+
+            # Submit
+            # print("Submitting...")
+
+            # c = input("Input any key to continue: ")  # Temporary manual breakpoint
+
+            driver.find_element_by_id(
+                "ClassificationsSearchGrid_SubmitByClassificationsButton").click()
+
+            # Refresh Window and frame
+            time.sleep(3)
+            window = driver.window_handles[0]
+            driver.switch_to.window(window)
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+            driver.switch_to.frame(frame)
+
+            # Select random page that is not last Page
+            # print("Selecting Random Page (Not last page)...")
+
+            # c = input("Input any key to continue: ")  # Temporary manual breakpoint
+
+            pages = []
+            pages = driver.find_elements_by_class_name("paginationLink")
+
+            reviewersAssigned = []
+            count = 0
+
+            if len(pages) < 3:  # only one or two pages: dont click any page value
+                # print("There are less than 3 pages, staying with first page.")
+
+                # print("Checking two board members, then 28 non board members...")
+                x = 0
+                pick22NonBoardMembers()
+
+
+            else:
+                print("length of pages = ", len(pages))
+                rand = random.randrange(0, len(pages))  # select any except for last
+                print("rand = ", rand)
+                """
+                try:
+                    length = len(pages)-2  # -2 to account for the two arrows
+                except:  # in case page numbers arent showing
+                    length = 1
+                # print("There are ", length, " pages on this selection.")
+                if length > 10:
+                    # print("There are more than 10 pages, setting max to 10...")
+                    length = 10
+
+                if length < 3:
+                    rand = 1
+                else:
+                    rand = random.randrange(0, length-1)  # select any except for last"""
+                # print("Random page choice: ", rand + 1)
+
+                # if page == 1... continue like normal
+
+                # if page !=1... click two from first page, then continue with count +=2
+
+                if rand > 1:  # if page choice is not the first page, pick two then continue
+                    # print("Checking two board members from first page, then 28 from the other page...")
+                    x = 0
+                    pick22NonBoardMembers()
+                    # c = input("Temporary break: ")
+                    try:
+                        pages[rand].click()
+                    except:
+                        print("Unable to click random page")
+                    # c = input("Temporary break: ")
+                    pick22NonBoardMembers()
+                else:
+                    # print("Checking two board members, then 28 non board members...")
+                    x = 0
+                    pick22NonBoardMembers()
+
+
+                # Refresh Window and frame
                 time.sleep(3)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
-                submit = driver.find_element_by_name("btnSubmit").click()
-                # driver.find_element_by_id('//*[@id="btnSubmit"]').click()
+            # check two board members from first page
 
-                # wait long time for it to send the emails
-                time.sleep(9)
+            # check 30 eligibile reviewers
 
-                # go back to last page:
-                # print("Clicking 'Return to New Editor Assignments' button now...")
+            x = 0
 
+            # c = input("Input any key to continue: ")  # Temporary manual breakpoint
+
+            try:
+                # click Proceed
+                # driver.find_element_by_id('btnSubmit').click()  # //*[@id="btnSubmit"]
+                driver.find_element_by_id('ProceedButton').click()  # //*[@id="btnSubmit"]
+
+                time.sleep(4)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
-                driver.find_element_by_id("linkReturn").click()
-                iterations += 1
-                total -= 1
-                print("Iterations completed = ", iterations)
-                print("Total remaining = ", total)
+                # wait for confirmation/continue
+                print("Iterations = ", iterations)
+                # print("Make sure that all the selected reviewers are good. If any are bad, check the 'do not assign' checkbox for them.")
+                cont = 'y'  # temporary to remove user input
+                # cont = input("Would you like to continue and repeat? (y/n): ") #useful for double checking after each article if necessary
+                if(cont == 'y'):
+                    # click confirm and send
 
-            else:
-                # print("Not a (y), exiting code now...")
-                break
+                    # print("You sent a y, clicking confirm and continuing now...")
+                    time.sleep(4)
+                    window = driver.window_handles[0]
+                    driver.switch_to.window(window)
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+                    driver.switch_to.frame(frame)
 
-            # iterations -= 1  # decrease
-        except:
-            # print("Continue a different article...")
+                    try:
+                        submit = driver.find_element_by_id("ClassificationsSearchGrid_SubmitByClassificationsButton").click()
+                    except:
+                        submit = driver.find_element_by_id("btnSubmit").click()
 
-            # click the go back button and wait
-            driver.find_element_by_id("linkReturnToEditorFolder1").click()
-            time.sleep(3)
-            window = driver.window_handles[0]
-            driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
-            driver.switch_to.frame(frame)
+                    #submit = driver.find_element_by_id("btnSubmit").click()
+                    # driver.find_element_by_id('//*[@id="btnSubmit"]').click()
+# //*[@id="ClassificationsSearchGrid_SubmitByClassificationsButton"]
+                    # wait long time for it to send the emails
+                    time.sleep(9)
 
-            skips += 1
+                    # go back to last page:
+                    # print("Clicking 'Return to New Editor Assignments' button now...")
 
-    print("Iterations completed = ", iterations)
-    print("Total remaining = ", total)
+                    window = driver.window_handles[0]
+                    driver.switch_to.window(window)
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+                    driver.switch_to.frame(frame)
+
+                    driver.find_element_by_id("linkReturn").click()
+
+                else:
+                    # print("Not a (y), exiting code now...")
+
+                    break
+
+                total -= 1  # decrease
+                iterations += 1  # increase the count
+                print("New iterations after completing this article = ", iterations)
+
+            except:  # error: not enough reviewers to complete this article
+
+                skips += 1
+
+                time.sleep(5)
+                window = driver.window_handles[0]
+                driver.switch_to.window(window)
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+                driver.switch_to.frame(frame)
+
+                # click back to new assignments Button
+                driver.find_element_by_id("linkReturnToEditorFolder1").click()
+
+                # print(skips)
+                if(articleNum == "fr100"):
+                    # print("This was the last article on the page, going back a page...")
+
+                    # go back a page...
+                    driver.find_element_by_xpath(
+                        '//*[@id="FGSubmissions"]/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/div/div[2]/table/tbody/tr/td[2]/a').click()
+                    time.sleep(7)
+                    window = driver.window_handles[0]
+                    driver.switch_to.window(window)
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
+                    driver.switch_to.frame(frame)
+
+                # c = input("break")
+                # print("Continuing with new skips: ", skips)
+
+        else:
+            pages = skips % 100
+            # go to the correct page:
+            print("skips >=100... pages = ", pages)
+            c = input("break, ")
+            for i in pages:
+                c = input("break")
+                # click next page
+        print("Finished! Either max iterations have been reached, or user exited...\n Final iterations = ", iterations)
+
 elif option == 3:
     iterations = 0
     total = int(input("How many iterations?  \n"))
@@ -1812,7 +1771,7 @@ elif option == 3:
 
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
     decision = driver.find_element_by_id("nfr0")
@@ -1833,7 +1792,7 @@ elif option == 3:
     # pause:
     window = driver.window_handles[0]
     driver.switch_to.window(window)
-    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
     driver.switch_to.frame(frame)
 
     decision = driver.find_element_by_id("nfr0")
@@ -1848,7 +1807,7 @@ elif option == 3:
             time.sleep(6)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             # c = input("Input any key to continue: ")  # Temporary manual breakpoint
@@ -1878,7 +1837,7 @@ elif option == 3:
                         time.sleep(6)
                         window = driver.window_handles[0]
                         driver.switch_to.window(window)
-                        frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                        frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                         driver.switch_to.frame(frame)
                     skips += 1
 
@@ -1900,7 +1859,7 @@ elif option == 3:
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
             driver.find_element_by_xpath(
@@ -1910,7 +1869,7 @@ elif option == 3:
             time.sleep(3)
             window = driver.window_handles[0]
             driver.switch_to.window(window)
-            frame = driver.find_element_by_xpath('//frame[@name="content"]')
+            frame = driver.find_element_by_xpath('//iframe[@name="content"]')
             driver.switch_to.frame(frame)
 
 
@@ -1930,7 +1889,7 @@ elif option == 3:
                 time.sleep(4)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
                 # wait for confirmation/continue
@@ -1945,7 +1904,7 @@ elif option == 3:
                     time.sleep(4)
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                     try:
@@ -1964,7 +1923,7 @@ elif option == 3:
 
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                     driver.find_element_by_id("linkReturn").click()
@@ -1985,7 +1944,7 @@ elif option == 3:
                 time.sleep(5)
                 window = driver.window_handles[0]
                 driver.switch_to.window(window)
-                frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                 driver.switch_to.frame(frame)
 
                 # click back to new assignments Button
@@ -2001,7 +1960,7 @@ elif option == 3:
                     time.sleep(7)
                     window = driver.window_handles[0]
                     driver.switch_to.window(window)
-                    frame = driver.find_element_by_xpath('//frame[@name="content"]')
+                    frame = driver.find_element_by_xpath('//iframe[@name="content"]')
                     driver.switch_to.frame(frame)
 
                 # c = input("break")
