@@ -1403,7 +1403,7 @@ if option == 2:
     # print("Selecting 'New Assignments' ...")
 
     driver.find_element_by_xpath(
-        '/html/body/form/div[3]/div[3]/div/div/div[3]/fieldset/div/div[3]/a[1]').click()
+        '/html/body/form/div[3]/div[3]/div/div/div[3]/fieldset/div/div[4]/a[1]').click()
 
     # Refresh Window and Frame
     time.sleep(3)
